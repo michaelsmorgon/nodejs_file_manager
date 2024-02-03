@@ -6,6 +6,7 @@ import errorMsg from './error/error_msg.js';
 import fileSystem from './fs/file_system.js';
 import zip from './zip/zip.js';
 import hash from './hash/calcHash.js';
+import operatingSystemInfo from './os/operatingSystem.js';
 
 try {
   if (!user.getUsername()) {
@@ -61,6 +62,8 @@ try {
       zip.decompress(params[0], params[1]);
     } else if (data.indexOf('hash ') === 0) {
       hash.calculateHash(data.slice(5));
+    } else if (data.indexOf('os --') === 0) {
+      operatingSystemInfo.getInfo(data.slice(5));
     } else {
       errorMsg.printInvalidInputMsg();
       currentDirectory.currentDirMsg();
