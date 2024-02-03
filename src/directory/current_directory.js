@@ -15,12 +15,15 @@ class CurrentDirectory {
   }
   
   setCurrentDir(newDir) {
-    this.currentDir = newDir.slice(-1) !== '\\' ? newDir : newDir.slice(0, newDir.length - 1);
+    this.currentDir = newDir;
     this.currentDirMsg();
   }
 
   currentDirMsg() {
-    console.log(`You are currently in ${this.currentDir}\n`);
+    const show = this.currentDir.slice(-1) !== '\\'
+      ? this.currentDir
+      : this.currentDir.slice(0, this.currentDir.length - 1);
+    console.log(`You are currently in ${show}\n`);
   }
 }
 
