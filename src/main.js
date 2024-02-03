@@ -1,8 +1,8 @@
 import process from 'node:process';
 import user from './user/user.js';
 import currentDirectory from './directory/current_directory.js';
-import fsNavigation from './fs/file_system.js';
-import errorMsg from './error/error.js';
+import fsNavigation from './navigation/fs_navigation.js';
+import errorMsg from './error/error_msg.js';
 
 try {
   if (!user.getUsername()) {

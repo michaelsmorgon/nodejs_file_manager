@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import currentDirectory from '../directory/current_directory.js';
-import errorMsg from '../error/error.js';
+import errorMsg from '../error/error_msg.js';
 
 class FSNavigation {
   list() {
