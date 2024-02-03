@@ -7,12 +7,10 @@ class FileSystem {
   async read(filePath) {
     try {
       if (filePath.indexOf('.') === 0) {
-        const fileContent = await fs.readFile(path.join(currentDirectory.getCurrentDir(), filePath), 'utf-8');
-        console.log(fileContent);
-      } else {
-        const fileContent = await fs.readFile(filePath, 'utf-8');
-        console.log(fileContent);
+        filePath = path.join(currentDirectory.getCurrentDir(), filePath);
       }
+      const fileContent = await fs.readFile(filePath, 'utf-8');
+      console.log(fileContent);
     } catch (err) {
       errorMsg.printOperationFailedMsg();
     }
