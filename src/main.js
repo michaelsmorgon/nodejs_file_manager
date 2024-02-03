@@ -3,6 +3,7 @@ import user from './user/user.js';
 import currentDirectory from './directory/current_directory.js';
 import fsNavigation from './navigation/fs_navigation.js';
 import errorMsg from './error/error_msg.js';
+import fileSystem from './fs/file_system.js';
 
 try {
   if (!user.getUsername()) {
@@ -24,6 +25,8 @@ try {
       fsNavigation.cd(data.slice(3));
     } else if (data === 'ls') {
       fsNavigation.list();
+    } else if (data.indexOf('cat ') === 0) {
+      fileSystem.read(data.slice(4));
     } else {
       errorMsg.printInvalidInputMsg();
       currentDirectory.currentDirMsg();
