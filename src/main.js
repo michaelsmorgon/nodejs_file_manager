@@ -30,11 +30,13 @@ try {
     } else if (data.indexOf('add ') === 0) {
       fileSystem.create(data.slice(4));
     } else if (data.indexOf('rn ') === 0) {
+      fileSystem.create(data.slice(4));
+    } else if (data.indexOf('cp ') === 0) {
       const params = data.slice(3).split(' ');
       if (params.length < 2) {
         errorMsg.printInvalidInputMsg();
       }
-      fileSystem.rename(params[0], params[1]);
+      fileSystem.copy(params[0], params[1]);
     } else {
       errorMsg.printInvalidInputMsg();
       currentDirectory.currentDirMsg();

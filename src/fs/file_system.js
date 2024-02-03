@@ -39,6 +39,24 @@ class FileSystem {
     }
     currentDirectory.currentDirMsg();
   }
+
+  async copy(sourceFilePath, newDirectoryPath) {
+    try {
+      if (sourceFilePath.indexOf('.') === 0) {
+        sourceFilePath = path.join(currentDirectory.getCurrentDir(), sourceFilePath);
+      }
+      if (newDirectoryPath.indexOf('.') === 0) {
+        newDirectoryPath = path.join(currentDirectory.getCurrentDir(), newDirectoryPath);
+      }
+
+      const sourceFileName = path.basename(sourceFilePath);
+      const destinationFilePath = path.join(newDirectoryPath, sourceFileName); 
+      await fs.copyFile(sourceFilePath, destinationFilePath);
+    } catch (err) {
+      errorMsg.printOperationFailedMsg();
+    }
+    currentDirectory.currentDirMsg();
+  }
 }
 
 const fileSystem = new FileSystem();
