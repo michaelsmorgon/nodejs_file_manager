@@ -1,0 +1,27 @@
+{
+  "name": "nodejs_file_manager",
+  "version": "1.0.0",
+  "description": "file manager",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelsmorgon/nodejs_file_manager.git"
+  },
+  "keywords": [
+    "file",
+    "manager"
+  ],
+  "author": "michaelsmorgon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelsmorgon/nodejs_file_manager/issues"
+  },
+  "homepage": "https://github.com/michaelsmorgon/nodejs_file_manager#readme"
+}
