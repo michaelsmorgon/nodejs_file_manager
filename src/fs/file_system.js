@@ -6,8 +6,13 @@ import currentDirectory from '../directory/current_directory.js';
 class FileSystem {
   async read(filePath) {
     try {
-      const fileContent = await fs.readFile(path.join(currentDirectory.getCurrentDir(), filePath), 'utf-8');
-      console.log(fileContent);
+      if (filePath.indexOf('.') === 0) {
+        const fileContent = await fs.readFile(path.join(currentDirectory.getCurrentDir(), filePath), 'utf-8');
+        console.log(fileContent);
+      } else {
+        const fileContent = await fs.readFile(filePath, 'utf-8');
+        console.log(fileContent);
+      }
     } catch (err) {
       errorMsg.printOperationFailedMsg();
     }
