@@ -26,6 +26,19 @@ class FileSystem {
     }
     currentDirectory.currentDirMsg();
   }
+
+  async rename(filePath, newFileName) {
+    try {
+      if (filePath.indexOf('.') === 0) {
+        filePath = path.join(currentDirectory.getCurrentDir(), filePath);
+      }
+      const newFilePath = path.join(currentDirectory.getCurrentDir(), newFileName); 
+      await fs.rename(filePath, newFilePath);
+    } catch (err) {
+      errorMsg.printOperationFailedMsg();
+    }
+    currentDirectory.currentDirMsg();
+  }
 }
 
 const fileSystem = new FileSystem();
