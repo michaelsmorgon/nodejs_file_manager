@@ -57,6 +57,18 @@ class FileSystem {
     }
     currentDirectory.currentDirMsg();
   }
+
+  async delete(filePath) {
+    if (filePath.indexOf('.') === 0) {
+      filePath = path.join(currentDirectory.getCurrentDir(), filePath);
+    }
+    try {
+      await fs.rm(filePath);
+    } catch {
+      errorMsg.printOperationFailedMsg();
+    }
+    currentDirectory.currentDirMsg();
+  }
 }
 
 const fileSystem = new FileSystem();

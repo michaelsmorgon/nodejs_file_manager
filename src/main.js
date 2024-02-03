@@ -30,7 +30,9 @@ try {
     } else if (data.indexOf('add ') === 0) {
       fileSystem.create(data.slice(4));
     } else if (data.indexOf('rn ') === 0) {
-      fileSystem.create(data.slice(4));
+      fileSystem.create(data.slice(3));
+    } else if (data.indexOf('rm ') === 0) {
+      fileSystem.delete(data.slice(3));
     } else if (data.indexOf('cp ') === 0) {
       const params = data.slice(3).split(' ');
       if (params.length < 2) {
