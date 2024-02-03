@@ -18,6 +18,8 @@ try {
     if (data === '.exit') {
       user.byeUserMsg();
       process.exit();
+    } else if (data === 'up') {
+      new FS().up();
     } else {
       new ErrorMsg().printInvalidInputMsg();
       currentDirectory.currentDirMsg();
