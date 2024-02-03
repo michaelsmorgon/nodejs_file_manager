@@ -4,6 +4,7 @@ import currentDirectory from './directory/current_directory.js';
 import fsNavigation from './navigation/fs_navigation.js';
 import errorMsg from './error/error_msg.js';
 import fileSystem from './fs/file_system.js';
+import zip from './zip/zip.js';
 
 try {
   if (!user.getUsername()) {
@@ -45,6 +46,18 @@ try {
         errorMsg.printInvalidInputMsg();
       }
       fileSystem.move(params[0], params[1]);
+    } else if (data.indexOf('compress ') === 0) {
+      const params = data.slice(9).split(' ');
+      if (params.length < 2) {
+        errorMsg.printInvalidInputMsg();
+      }
+      zip.compress(params[0], params[1]);
+    } else if (data.indexOf('decompress ') === 0) {
+      const params = data.slice(11).split(' ');
+      if (params.length < 2) {
+        errorMsg.printInvalidInputMsg();
+      }
+      zip.decompress(params[0], params[1]);
     } else {
       errorMsg.printInvalidInputMsg();
       currentDirectory.currentDirMsg();

@@ -8,9 +8,7 @@ import { pipeline } from 'node:stream/promises';
 class FileSystem {
   async read(filePath) {
     try {
-      if (filePath.indexOf('.') === 0) {
-        filePath = path.join(currentDirectory.getCurrentDir(), filePath);
-      }
+      filePath = this.checkFilePath(filePath);
       const fileContent = await fs.readFile(filePath, 'utf-8');
       console.log(fileContent);
     } catch (err) {
@@ -31,9 +29,7 @@ class FileSystem {
 
   async rename(filePath, newFileName) {
     try {
-      if (filePath.indexOf('.') === 0) {
-        filePath = path.join(currentDirectory.getCurrentDir(), filePath);
-      }
+      filePath = this.checkFilePath(filePath);
       const newFilePath = path.join(currentDirectory.getCurrentDir(), newFileName); 
       await fs.rename(filePath, newFilePath);
     } catch (err) {
@@ -44,12 +40,8 @@ class FileSystem {
 
   async copy(sourceFilePath, newDirectoryPath, showCurrentDirMsg = true) {
     try {
-      if (sourceFilePath.indexOf('.') === 0) {
-        sourceFilePath = path.join(currentDirectory.getCurrentDir(), sourceFilePath);
-      }
-      if (newDirectoryPath.indexOf('.') === 0) {
-        newDirectoryPath = path.join(currentDirectory.getCurrentDir(), newDirectoryPath);
-      }
+      sourceFilePath = this.checkFilePath(sourceFilePath);
+      newDirectoryPath = this.checkFilePath(newDirectoryPath);
 
       let isFile = false;
       fs.stat(sourceFilePath, (err, stats) => {
@@ -75,9 +67,7 @@ class FileSystem {
   }
 
   async delete(filePath, showCurrentDirMsg = true) {
-    if (filePath.indexOf('.') === 0) {
-      filePath = path.join(currentDirectory.getCurrentDir(), filePath);
-    }
+    filePath = this.checkFilePath(filePath);
     try {
       await fs.rm(filePath);
     } catch {
@@ -96,6 +86,14 @@ class FileSystem {
       errorMsg.printOperationFailedMsg();
     }
     currentDirectory.currentDirMsg();
+  }
+
+  checkFilePath(filePath) {
+    if (filePath.indexOf('.') === 0) {
+      filePath = path.join(currentDirectory.getCurrentDir(), filePath);
+    }
+
+    return filePath;
   }
 }
 
