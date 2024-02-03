@@ -22,6 +22,8 @@ try {
       new FS().up();
     } else if (data.indexOf('cd ') === 0) {
       new FS().cd(data.slice(3));
+    } else if (data === 'ls') {
+      new FS().list();
     } else {
       new ErrorMsg().printInvalidInputMsg();
       currentDirectory.currentDirMsg();
