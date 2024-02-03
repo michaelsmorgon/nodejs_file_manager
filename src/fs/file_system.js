@@ -16,6 +16,16 @@ class FileSystem {
     }
     currentDirectory.currentDirMsg();
   }
+
+  async create(fileName) {
+    try {
+      const newFilePath = path.join(currentDirectory.getCurrentDir(), fileName);
+      await fs.writeFile(newFilePath, '', { flag: 'wx' });
+    } catch (err) {
+      errorMsg.printOperationFailedMsg();
+    }
+    currentDirectory.currentDirMsg();
+  }
 }
 
 const fileSystem = new FileSystem();

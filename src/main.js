@@ -27,6 +27,8 @@ try {
       fsNavigation.list();
     } else if (data.indexOf('cat ') === 0) {
       fileSystem.read(data.slice(4));
+    } else if (data.indexOf('add ') === 0) {
+      fileSystem.create(data.slice(4));
     } else {
       errorMsg.printInvalidInputMsg();
       currentDirectory.currentDirMsg();
