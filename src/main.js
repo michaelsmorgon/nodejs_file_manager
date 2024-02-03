@@ -39,6 +39,12 @@ try {
         errorMsg.printInvalidInputMsg();
       }
       fileSystem.copy(params[0], params[1]);
+    } else if (data.indexOf('mv ') === 0) {
+      const params = data.slice(3).split(' ');
+      if (params.length < 2) {
+        errorMsg.printInvalidInputMsg();
+      }
+      fileSystem.move(params[0], params[1]);
     } else {
       errorMsg.printInvalidInputMsg();
       currentDirectory.currentDirMsg();
