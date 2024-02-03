@@ -20,6 +20,8 @@ try {
       process.exit();
     } else if (data === 'up') {
       new FS().up();
+    } else if (data.indexOf('cd ') === 0) {
+      new FS().cd(data.slice(3));
     } else {
       new ErrorMsg().printInvalidInputMsg();
       currentDirectory.currentDirMsg();
