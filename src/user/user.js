@@ -19,11 +19,11 @@ class User {
   }
 
   welcomeUserMsg() {
-    console.log(`Welcome to the File Manager, ${this.username}!`);
+    console.log(`\x1b[33mWelcome to the File Manager, ${this.username}!\x1b[0m`);
   }
 
   byeUserMsg() {
-    console.log(`Thank you for using File Manager, ${this.username}, goodbye!`);
+    console.log(`\x1b[33mThank you for using File Manager, ${this.username}, goodbye!\x1b[0m`);
   }
 }
 
