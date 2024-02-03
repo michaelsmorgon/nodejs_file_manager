@@ -1,18 +1,16 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import currentDirectory from '../directory/current_directory.js';
-import ErrorMsg from '../error/error.js';
+import errorMsg from '../error/error.js';
 
-export default class FS {
-  constructor() {}
-
+class FSNavigation {
   list() {
     const dirPath = path.join(currentDirectory.getCurrentDir());
 
     try {
       fs.readdir(dirPath, {withFileTypes: true }, (err, files) => {
         if (err) {
-          new ErrorMsg().printOperationFailedMsg();
+          errorMsg.printOperationFailedMsg();
           currentDirectory.currentDirMsg();
           return;
         }
@@ -30,7 +28,7 @@ export default class FS {
         currentDirectory.currentDirMsg();
       });
     } catch {
-      new ErrorMsg().printOperationFailedMsg();
+      errorMsg.printOperationFailedMsg();
       currentDirectory.currentDirMsg();
     }
   }
@@ -50,7 +48,7 @@ export default class FS {
           if (err === null && stat.isDirectory()) {
             currentDirectory.setCurrentDir(newPath);
           } else {
-            new ErrorMsg().printInvalidInputMsg();
+            errorMsg.printInvalidInputMsg();
             currentDirectory.currentDirMsg();
           }
         });
@@ -58,3 +56,7 @@ export default class FS {
     });
   }
 }
+
+const fsNavigation = new FSNavigation();
+
+export default fsNavigation;

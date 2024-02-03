@@ -1,12 +1,12 @@
 import process from 'node:process';
 import user from './user/user.js';
 import currentDirectory from './directory/current_directory.js';
-import FS from './fs/file_system.js';
-import ErrorMsg from './error/error.js';
+import fsNavigation from './fs/file_system.js';
+import errorMsg from './error/error.js';
 
 try {
   if (!user.getUsername()) {
-    new ErrorMsg().printInvalidInputMsg();
+    errorMsg.printInvalidInputMsg();
     process.exit();
   }
 
@@ -19,13 +19,13 @@ try {
       user.byeUserMsg();
       process.exit();
     } else if (data === 'up') {
-      new FS().up();
+      fsNavigation.up();
     } else if (data.indexOf('cd ') === 0) {
-      new FS().cd(data.slice(3));
+      fsNavigation.cd(data.slice(3));
     } else if (data === 'ls') {
-      new FS().list();
+      fsNavigation.list();
     } else {
-      new ErrorMsg().printInvalidInputMsg();
+      errorMsg.printInvalidInputMsg();
       currentDirectory.currentDirMsg();
     }
   });
@@ -35,6 +35,6 @@ try {
     process.exit();
   });
 } catch {
-  new ErrorMsg().printInvalidInputMsg();
+  errorMsg.printInvalidInputMsg();
   currentDirectory.currentDirMsg();
 }

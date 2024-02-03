@@ -1,7 +1,6 @@
-export default class ErrorMsg {
+class ErrorMsg {
   invalidInput = 'Invalid input';
   operationFailed = 'Operation failed';
-  constructor() {}
 
   printInvalidInputMsg() {
     console.log(this.invalidInput);
@@ -11,3 +10,7 @@ export default class ErrorMsg {
     console.log(this.operationFailed);
   }
 }
+
+const errorMsg = new ErrorMsg();
+
+export default errorMsg;
