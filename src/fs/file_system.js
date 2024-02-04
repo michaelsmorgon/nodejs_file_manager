@@ -1,5 +1,5 @@
 import path from 'node:path';
-import fs from 'fs/promises';
+import fsPromises from 'fs/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
 import errorMsg from '../error/error_msg.js';
 import currentDirectory from '../directory/current_directory.js';
@@ -9,7 +9,7 @@ class FileSystem {
   async read(filePath) {
     try {
       filePath = this.checkFilePath(filePath);
-      const fileContent = await fs.readFile(filePath, 'utf-8');
+      const fileContent = await fsPromises.readFile(filePath, 'utf-8');
       console.log(fileContent);
     } catch (err) {
       errorMsg.printOperationFailedMsg();
@@ -20,7 +20,7 @@ class FileSystem {
   async create(fileName) {
     try {
       const newFilePath = path.join(currentDirectory.getCurrentDir(), fileName);
-      await fs.writeFile(newFilePath, '', { flag: 'wx' });
+      await fsPromises.writeFile(newFilePath, '', { flag: 'wx' });
     } catch (err) {
       errorMsg.printOperationFailedMsg();
     }
@@ -31,7 +31,7 @@ class FileSystem {
     try {
       filePath = this.checkFilePath(filePath);
       const newFilePath = path.join(currentDirectory.getCurrentDir(), newFileName); 
-      await fs.rename(filePath, newFilePath);
+      await fsPromises.rename(filePath, newFilePath);
     } catch (err) {
       errorMsg.printOperationFailedMsg();
     }
@@ -43,14 +43,8 @@ class FileSystem {
       sourceFilePath = this.checkFilePath(sourceFilePath);
       newDirectoryPath = this.checkFilePath(newDirectoryPath);
 
-      let isFile = false;
-      fs.stat(sourceFilePath, (err, stats) => {
-        if (stats.isFile()) {
-          isFile = true;
-        }
-      });
-
-      if (!isFile) {
+      const stat = await fsPromises.stat(sourceFilePath);
+      if (!stat.isFile()) {
         return;
       }
       const sourceFileName = path.basename(sourceFilePath);
@@ -69,7 +63,7 @@ class FileSystem {
   async delete(filePath, showCurrentDirMsg = true) {
     filePath = this.checkFilePath(filePath);
     try {
-      await fs.rm(filePath);
+      await fsPromises.rm(filePath);
     } catch {
       errorMsg.printOperationFailedMsg();
     }

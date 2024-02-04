@@ -21,7 +21,7 @@ class OperatingSystemInfo {
         this.getCPUArchitecture();
         break;
       default:
-        errorMsg.printInvalidInputMsg();
+        errorMsg.printInvalidInputMsg(false);
         break;
     }
     currentDirectory.currentDirMsg();

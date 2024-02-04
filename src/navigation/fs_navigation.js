@@ -48,11 +48,9 @@ class FSNavigation {
         currentDirectory.setCurrentDir(newPath);
       } else {
         errorMsg.printInvalidInputMsg();
-        currentDirectory.currentDirMsg();
       }
     } catch {
       errorMsg.printInvalidInputMsg();
-      currentDirectory.currentDirMsg();
     }
   }
 }
