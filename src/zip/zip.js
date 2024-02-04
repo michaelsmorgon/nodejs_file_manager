@@ -42,7 +42,7 @@ class Zip {
           zlibProcess = zlib.createBrotliDecompress();
         }
 
-        pipeline(readStream, zlibProcess, writeStream);
+        await pipeline(readStream, zlibProcess, writeStream);
       }
     } catch (err) {
       errorMsg.printOperationFailedMsg();

@@ -51,7 +51,7 @@ class FileSystem {
       const destinationFilePath = path.join(newDirectoryPath, sourceFileName);
       const readStream = createReadStream(sourceFilePath);
       const writeStream = createWriteStream(destinationFilePath);
-      pipeline(readStream, writeStream);
+      await pipeline(readStream, writeStream);
     } catch (err) {
       errorMsg.printOperationFailedMsg();
     }
