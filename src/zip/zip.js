@@ -26,24 +26,14 @@ class Zip {
       if (!sourceFilePathStats.isFile()) {
         return;
       }
-      const destinationPathStats = await fs.stat(destinationPath);
-
-      if (destinationPathStats.isDirectory()) {
-        const sourceFileName = path.basename(sourceFilePath);
-        let destinationFilePath = path.join(destinationPath, sourceFileName + '.br');
-        if (!isCompress) {
-          destinationFilePath = path.join(destinationPath, sourceFileName.slice(0, -3));
-        }
-
-        const readStream = createReadStream(sourceFilePath);
-        const writeStream = createWriteStream(destinationFilePath);
-        let zlibProcess = zlib.createBrotliCompress();
-        if (!isCompress) {
-          zlibProcess = zlib.createBrotliDecompress();
-        }
-
-        await pipeline(readStream, zlibProcess, writeStream);
+      const readStream = createReadStream(sourceFilePath);
+      const writeStream = createWriteStream(destinationPath);
+      let zlibProcess = zlib.createBrotliCompress();
+      if (!isCompress) {
+        zlibProcess = zlib.createBrotliDecompress();
       }
+
+      await pipeline(readStream, zlibProcess, writeStream);
     } catch (err) {
       errorMsg.printOperationFailedMsg();
     }
