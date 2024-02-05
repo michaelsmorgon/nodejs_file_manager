@@ -2,16 +2,18 @@ import os from 'node:os';
 
 class CurrentDirectory {
   constructor() {
-    this.currentDir = os.homedir().replaceAll('\\', '/');
+    this.setCurrentDir(os.homedir(), false);
   }
 
   getCurrentDir() {
     return this.currentDir;
   }
   
-  setCurrentDir(newDir) {
-    this.currentDir = newDir;
-    this.currentDirMsg();
+  setCurrentDir(newDir, isShowMsg = true) {
+    this.currentDir = newDir.replaceAll('\\', '/');
+    if (isShowMsg) {
+      this.currentDirMsg();
+    }
   }
 
   currentDirMsg() {
