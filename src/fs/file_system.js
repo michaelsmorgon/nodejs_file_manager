@@ -83,7 +83,7 @@ class FileSystem {
   }
 
   checkFilePath(filePath) {
-    if (filePath.indexOf('.') === 0) {
+    if (filePath.indexOf('.') === 0 || filePath.indexOf('/') === -1) {
       filePath = path.join(currentDirectory.getCurrentDir(), filePath);
     }
 
