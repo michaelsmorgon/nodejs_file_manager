@@ -28,7 +28,7 @@ class OperatingSystemInfo {
   }
 
   getEOL() {
-    console.log(os.EOL);
+    console.log(JSON.stringify(os.EOL));
   }
 
   getCPUInfo() {
