@@ -86,15 +86,9 @@ const getArguments = (input) => {
       case " ":
         if (startedStrInQuotes) {
           argument += input[i];
-        } else {
-          if (args.length == 0) {
-            args.push(argument);
-            argument = '';
-            break;
-          }
-          if (argument !== '') {
-            argument += input[i];
-          }
+        } else if (argument !== '') {
+          args.push(argument);
+          argument = '';
         }
         break;
       default:
