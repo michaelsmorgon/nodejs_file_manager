@@ -42,6 +42,9 @@ class FSNavigation {
 
   async cd(newPath) {
     try {
+      if (newPath.length === 2 && newPath[1] === ':') {
+        newPath = newPath + '//';
+      }
       newPath = fileSystem.checkFilePath(newPath);
       const stat = await fsPromises.stat(newPath);
       if (stat.isDirectory()) {

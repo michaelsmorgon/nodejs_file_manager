@@ -15,9 +15,9 @@ class CurrentDirectory {
   }
 
   currentDirMsg() {
-    const show = this.currentDir.slice(-1) !== '\\'
-      ? this.currentDir
-      : this.currentDir.slice(0, this.currentDir.length - 1);
+    const show = (this.currentDir.slice(-1) === '/' && this.currentDir.length > 3)
+      ? this.currentDir.slice(0, this.currentDir.length - 1)
+      : this.currentDir;
     console.log(`\x1b[32mYou are currently in ${show}\x1b[0m`);
   }
 }

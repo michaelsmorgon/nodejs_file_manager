@@ -18,7 +18,7 @@ try {
   currentDirectory.currentDirMsg();
 
   process.stdin.on('data', (chunk) => {
-    const data = chunk.toString().trim();
+    const data = chunk.toString().replaceAll('\\', '/').trim();
     if (data === '.exit') {
       user.byeUserMsg();
       process.exit();
